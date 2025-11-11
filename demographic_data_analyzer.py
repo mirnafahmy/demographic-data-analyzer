@@ -9,7 +9,7 @@ def calculate_demographic_data(print_data=True):
     race_count = df['race'].value_counts()
 
     # What is the average age of men?
-    average_age_men = round(df[df['sex'] == ['Male']['age'].mean(), 1])
+    average_age_men = round(df[df['sex'] == 'Male']['age'].mean(), 1)
 
     # What is the percentage of people who have a Bachelor's degree?
     percentage_bachelors = round(df[df['education'] == 'Bachelors'].shape[0] / df.shape[0] * 100, 1)
@@ -21,7 +21,7 @@ def calculate_demographic_data(print_data=True):
 
     # with and without `Bachelors`, `Masters`, or `Doctorate`
     higher_education = df['education'].isin(['Bachelors', 'Masters', 'Doctorate'])
-    lower_education = df['education'].isnot(['Bachelors', 'Masters', 'Doctorate'])
+    lower_education = ~df['education'].isin(['Bachelors', 'Masters', 'Doctorate'])
 
     # percentage with salary >50K
     higher_education_rich = round((ed & sal).sum() / ed.sum() * 100, 1)
